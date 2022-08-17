@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Home账单</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/grid.css" rel="stylesheet">
+    <!-- 引入刚刚下载的 ECharts 文件 -->
+    <script src="js/echarts.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Home账单</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExample01">
+            <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="nav-y" data-bs-toggle="dropdown" aria-expanded="false">年度</a>
+                    <ul class="dropdown-menu" aria-labelledby="nav-y" id="y-list">
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="nav-m" data-bs-toggle="dropdown" aria-expanded="false">月度</a>
+                    <ul class="dropdown-menu" aria-labelledby="nav-y" id="m-list">
+                        <li><a class="dropdown-item" href="#">全年</a></li>
+                        <li><a class="dropdown-item" href="#">1月</a></li>
+                        <li><a class="dropdown-item" href="#">2月</a></li>
+                        <li><a class="dropdown-item" href="#">3月</a></li>
+                        <li><a class="dropdown-item" href="#">4月</a></li>
+                        <li><a class="dropdown-item" href="#">5月</a></li>
+                        <li><a class="dropdown-item" href="#">6月</a></li>
+                        <li><a class="dropdown-item" href="#">7月</a></li>
+                        <li><a class="dropdown-item" href="#">8月</a></li>
+                        <li><a class="dropdown-item" href="#">9月</a></li>
+                        <li><a class="dropdown-item" href="#">10月</a></li>
+                        <li><a class="dropdown-item" href="#">11月</a></li>
+                        <li><a class="dropdown-item" href="#">12月</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container" style="margin-top: 20px">
+    <div class="row mb-2">
+        <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary">概览</strong>
+                    <h3 id="gl_amount" class="mb-0">消费总计</h3>
+                    <div id="gl_time" class="mb-1 text-muted">单位：元</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+    <div id="zzt" style="width: 600px;height:400px;margin: 20px; float: left"></div>
+    <div id="bzt" style="width: 600px;height:400px;margin: 20px; float: left"></div>
+</div>
+
+<script src="js/year_data.js"></script>
+<script src="js/year_zzt.js"></script>
+<script src="js/year_bzt.js"></script>
+<script type="text/javascript">
+    date = new Date
+    let selectYear = date.getFullYear()
+    let selectMonth = date.getMonth() + 1
+    $('#nav-y').html(selectYear)
+    $('#nav-m').html(selectMonth + '月')
+    loadYearList()
+    getData()
+    bzt()
+    zzt()
+    $('#gl_amount').html('消费总计：'+ yCount / 100 + '元')
+    if (selectMonth === ''){
+        $('#gl_time').html('时间：'+ selectYear + '年')
+    } else {
+        $('#gl_time').html('时间：'+ selectYear + '年' + selectMonth + '月')
+    }
+</script>
+</body>
+</html>
